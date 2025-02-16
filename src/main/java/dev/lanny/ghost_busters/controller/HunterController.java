@@ -12,7 +12,7 @@ public class HunterController {
 
     public HunterController(HunterModel hunterModel) {
         if (hunterModel == null) {
-            throw new IllegalArgumentException("HunterModel no puede ser nulo");
+            throw new IllegalArgumentException("HunterModel not can be null");
         }
         this.hunter = hunterModel;
     }

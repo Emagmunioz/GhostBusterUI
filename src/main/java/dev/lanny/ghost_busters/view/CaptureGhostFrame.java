@@ -97,7 +97,6 @@ public class CaptureGhostFrame extends JFrame {
             updateStatusLabel("❌ Fecha inválida. Use formato YYYY-MM-DD.");
             return;
         }
-
         try {
             GhostModel ghost = new GhostModel(name,
                     (GhostClass) ghostClassComboBox.getSelectedItem(),

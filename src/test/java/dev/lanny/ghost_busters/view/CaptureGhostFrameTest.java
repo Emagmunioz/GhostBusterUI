@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import dev.lanny.ghost_busters.controller.HunterController;
+import dev.lanny.ghost_busters.model.HunterModel;
 
 public class CaptureGhostFrameTest {
     private FrameFixture window;
@@ -21,10 +22,9 @@ public class CaptureGhostFrameTest {
     @DisplayName("Configurar la ventana antes de cada test")
     void setUp() {
         hunterController = new HunterController(
-                new dev.lanny.ghost_busters.model.HunterModel("Egon Spengler", new ArrayList<>()));
+                new HunterModel("Egon Spengler", new ArrayList<>()));
 
-        // Crear la UI en el Event Dispatch Thread (EDT)
-        CaptureGhostFrame captureGhostFrame = GuiActionRunner.execute(() -> new CaptureGhostFrame(hunterController));
+        CaptureGhostFrame captureGhostFrame = GuiActionRunner.execute(() -> new CaptureGhostFrame(null,hunterController));
         window = new FrameFixture(captureGhostFrame);
     }
 
@@ -58,15 +58,17 @@ public class CaptureGhostFrameTest {
     }
     
     @Test
-    @DisplayName("Si la fecha no tiene el formato correcto, deberia mostrar un error")
-    void testErrorMessage_ForInvalid_DateFormat() {
-        window.textBox("nameField").enterText("GhostName");
-        window.textBox("abilityField").enterText("Invisibility");
-        window.textBox("dateField").setText("12-02-2025");
+@DisplayName("Si la fecha no tiene el formato correcto, debería mostrar un error")
+void testErrorMessage_ForInvalid_DateFormat() {
+    window.textBox("nameField").enterText("GhostName");
+    window.textBox("abilityField").enterText("Invisibility");
+    window.textBox("dateField").setText("12-02-2025");
 
-        window.button("captureButton").click();
-        window.label("statusLabel").requireText("❌ Fecha inválida. Use formato YYYY-MM-DD.");
-    }
+    window.button("captureButton").click();
+    
+    window.label("statusLabel").requireText("❌ Fecha inválida. Use formato YYYY-MM-DD.");
+}
+
 
     @Test
     @DisplayName("Si todo esta bien, el fantasma deberia capturarse correctamente")
