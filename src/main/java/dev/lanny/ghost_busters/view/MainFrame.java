@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.nio.file.DirectoryStream.Filter;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -85,7 +86,8 @@ public class MainFrame extends JFrame {
                 .add(createButton("📜 Ver Lista de Fantasmas", 450, 270, () -> new ListGhostsFrame(hunterController)));
         buttonPanel.add(createButton("🔍 Eliminar Fantasmas", 450, 340,
                 () -> new DeleteGhostFrame(this, hunterController).setVisible(true)));
-        buttonPanel.add(createButton("🚪 Salir", 450, 410, this::exitApplication));
+        buttonPanel.add(createButton("🔍 Filtrar Fantasmas", 450, 410, () -> new FilterGhostFrame().setVisible(true)));
+        buttonPanel.add(createButton("🚪 Salir", 450, 480, this::exitApplication));
 
         layeredPane.add(buttonPanel, JLayeredPane.PALETTE_LAYER);
     }
