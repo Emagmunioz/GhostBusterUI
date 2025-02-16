@@ -28,14 +28,14 @@ public class ListGhostsFrame extends JFrame {
         setResizable(false);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(Color.BLACK); 
+        mainPanel.setBackground(new Color(50, 50, 50)); 
 
    
         JLabel titleLabel = new JLabel("📜 Lista de Fantasmas Capturados", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 26));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setOpaque(true);
-        titleLabel.setBackground(Color.BLACK);
+        titleLabel.setBackground(new Color(50, 50, 50)); 
         mainPanel.add(titleLabel, BorderLayout.NORTH);
 
         
@@ -46,10 +46,10 @@ public class ListGhostsFrame extends JFrame {
         // Botón para salir
         JButton backButton = new JButton("🚪 Volver");
         backButton.setFont(new Font("Sans", Font.BOLD, 16));
-        backButton.setBackground(Color.BLACK);
-        backButton.setForeground(Color.GREEN);
+        backButton.setBackground(new Color(50, 50, 50));
+        backButton.setForeground(Color.white);
         backButton.setFocusPainted(false);
-        backButton.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+        backButton.setBorder(BorderFactory.createLineBorder((new Color(0, 180, 180)), 2));
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,7 +59,7 @@ public class ListGhostsFrame extends JFrame {
 
        
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(Color.BLACK); 
+        buttonPanel.setBackground(new Color(50, 50, 50)); 
         buttonPanel.add(backButton);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -68,7 +68,7 @@ public class ListGhostsFrame extends JFrame {
     }
 
     private JTable createGhostsTable() {
-        String[] columnNames = {"ID", "Nombre", "Clase", "Fecha de Captura"};
+        String[] columnNames = {"ID", "Nombre","Peligro", "Clase","Habilidad", "Fecha/Captura"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
         List<GhostModel> ghosts = hunterController.getCapturedGhosts();
@@ -76,19 +76,21 @@ public class ListGhostsFrame extends JFrame {
             Object[] row = {
                 ghost.getId(),
                 ghost.getName(),
+                ghost.getThreatLevel(),
                 ghost.getGhostClass().toString(),
+                ghost.getSpecialAbility(),
                 ghost.getCaptureDate().toString()
             };
             model.addRow(row);
         }
 
         JTable table = new JTable(model);
-        table.setFont(new Font("Arial", Font.PLAIN, 14));
-        table.setForeground(Color.WHITE);
-        table.setBackground(Color.BLACK);
-        table.setGridColor(Color.GREEN);
-        table.setSelectionBackground(Color.GREEN);
-        table.setSelectionForeground(Color.BLACK);
+        table.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        table.setForeground(Color.white);
+        table.setBackground(new Color(50, 50, 50));
+        table.setGridColor(new Color(0, 180, 180));
+        table.setSelectionBackground(Color.blue);
+        table.setSelectionForeground(Color.blue);
         table.setRowHeight(25);
 
         return table;
